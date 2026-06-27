@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="public/dot_design.png" alt="Dot.Design" width="280" />
+
 <h1>Dot.Design</h1>
 
 <p>AI-powered canvas design tool — create stunning graphics, social posts, and marketing materials with generative AI assistance.</p>
