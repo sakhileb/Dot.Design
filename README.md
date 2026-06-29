@@ -1,84 +1,79 @@
 <div align="center">
 
-<img src="public/dot_design.png" alt="Dot.Design" width="280" />
+<img src="docs/logo.svg" alt="Dot.Design" width="320" />
 
-<h1>Dot.Design</h1>
+<br /><br />
 
-<p>AI-powered canvas design tool — create stunning graphics, social posts, and marketing materials with generative AI assistance.</p>
+**Create stunning graphics, social posts, and marketing materials with generative AI.**
 
-[![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white)](https://php.net)
-[![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![Livewire](https://img.shields.io/badge/Livewire-3.x-4E56A6?style=flat-square)](https://livewire.laravel.com)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://postgresql.org)
-[![Tests](https://img.shields.io/badge/tests-37%20passing-brightgreen?style=flat-square)](tests/)
-[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
+<br />
+
+![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat-square&logo=laravel&logoColor=white) ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white) ![Livewire](https://img.shields.io/badge/Livewire-3-FB70A9?style=flat-square) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=flat-square&logo=postgresql&logoColor=white)
+
+<br /><br />
+
+**Part of the [InfoDot Ecosystem](https://github.com/sakhileb/InfoDot)** &nbsp;·&nbsp; `design.infodot.app`
 
 </div>
 
 ---
 
-## Overview
+## What is Dot.Design?
 
-Dot.Design is the visual design platform in the Dot ecosystem. Build graphics on a pixel-accurate canvas with configurable dimensions, manage reusable assets, and accelerate creation with AI-generated images and layouts — all saved with a full element history per canvas.
+Dot.Design is the visual creation platform in the InfoDot ecosystem. A canvas-first editor paired with generative AI lets teams produce on-brand graphics, social media posts, and marketing collateral — no professional design experience required.
 
----
+## Core Features
 
-## Features
+- Canvas editor — drag-and-drop text, shapes, images, and icons
+- AI image generation from text prompts (via API integration)
+- AI layout suggestion — describe a design, get a starting canvas
+- Brand kit — team colours, fonts, and logo storage
+- Template library — pre-built layouts for social and print
+- Export to PNG, JPEG, SVG, and PDF
+- Design history and version rollback
+- Ecosystem SSO from InfoDot hub
 
-- **Canvas editor** — pixel-accurate canvas with configurable width, height, and unit (px/mm/in)
-- **Element layers** — shapes, text, images, and custom elements stored as JSON
-- **Multi-canvas projects** — each design project holds multiple canvas pages
-- **Asset library** — personal and team asset storage with type and metadata
-- **AI generation** — generate images and layout suggestions from a text prompt
-- **AI generation logs** — audit trail of every AI-assisted creation
-- **Export** — PNG, JPG, SVG, and PDF export per canvas
-- **Ecosystem SSO** — authenticate from InfoDot with a single click
+## Domain Models
 
----
-
-## Domain Model
-
-```
-DesignProject (width, height, unit) → DesignCanvases (elements JSON)
-                                    → DesignAssets   (meta JSON)
-AiGenerationLog → DesignProject + User
-```
-
----
+- **Design** — canvas project with metadata
+- **DesignElement** — positioned object on the canvas
+- **DesignTemplate** — reusable starting layout
+- **BrandKit** — team brand assets and palette
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Framework | Laravel 12 + PHP 8.4 |
-| Frontend | Livewire 3 + Alpine.js + Tailwind CSS |
-| Canvas | Konva.js / Fabric.js |
-| Auth | Jetstream 5 + Sanctum (ecosystem SSO) |
-| Database | PostgreSQL 16 (shared infodot instance) |
-| AI | Anthropic Claude API + image generation |
-| Storage | AWS S3 |
-
----
+| Framework | Laravel 12 |
+| Language | PHP 8.4 |
+| Frontend | Livewire 3 · Alpine.js 3 · Tailwind CSS |
+| Database | PostgreSQL 16 (shared across ecosystem) |
+| Realtime | Laravel Reverb |
+| Auth | Laravel Sanctum (InfoDot SSO) |
+| AI | Anthropic Claude (`claude-sonnet-4-6`) |
+| Storage | AWS S3 / Local (Flysystem) |
+| Search | Laravel Scout · Meilisearch |
+| Queue | Redis · Laravel Horizon |
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/sakhileb/Dot.Design.git && cd Dot.Design
-composer install && npm install
-cp .env.example .env && php artisan key:generate
-php artisan migrate && npm run dev & php artisan serve
+git clone https://github.com/sakhileb/Dot.Design.git
+cd Dot.Design
+cp .env.example .env
+composer install
+npm install && npm run build
+php artisan key:generate
+php artisan migrate
+php artisan serve
 ```
 
-```bash
-bash bin/test.sh   # 37 passing, 0 failed, 7 skipped
-```
+> **Ecosystem SSO:** Set `DB_*` env vars to the shared InfoDot PostgreSQL instance and `APP_URL=https://design.infodot.app`. Users authenticated through InfoDot gain access automatically via Sanctum handoff tokens.
 
----
+## Ecosystem
 
-## Part of the Dot Ecosystem
+**Dot.Design** is one of **21 platforms** in the InfoDot ecosystem, connected via shared PostgreSQL and Sanctum SSO. Visit [InfoDot](https://github.com/sakhileb/InfoDot) to explore the full platform map.
 
-Dot.Design connects to [InfoDot](https://github.com/sakhileb/InfoDot) — the central hub. Log in to InfoDot once and navigate here without re-authenticating via `/auth/ecosystem`.
+## License
 
----
-
-MIT — © SK Digital / BluPin Incorporated
+MIT © [SK Digital / BluPin Incorporated](https://github.com/sakhileb)
